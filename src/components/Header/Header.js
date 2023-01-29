@@ -66,6 +66,8 @@ const Header = ({ title }) => {
         }}>LOGIN</MenuList>
       </Menu>
 
+      <input type="text" placeholder='리뷰 검색 창(임시)' />
+
       {clickCT ? <CategoryContainer category={category} /> : null}
       <ButtonSection>
         <AddButton>

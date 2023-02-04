@@ -6,7 +6,7 @@ import CategoryContainer from './CategoryContainer'
 import axios from 'axios';
 
 const CLIENT_ID = "22cd6908590c582bad57a29459c75a6e";
-const REDIRECT_URI = "http://localhost:3000/oauth/callback/kakao";
+const REDIRECT_URI = "http://localhost:3000/oauth2/users/kakao";
 // const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=22cd6908590c582bad57a29459c75a6e&scope=profile_image%20account_email&state=LNDz-Z4GeTKTNaNMugPRpToxFTgjlCY76fzPmvh5hzk%3D&redirect_uri=http://localhost:3000/oauth/callback/kakao`;
 

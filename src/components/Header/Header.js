@@ -7,7 +7,6 @@ import axios from 'axios';
 const CLIENT_ID = "22cd6908590c582bad57a29459c75a6e";
 const REDIRECT_URI = "http://localhost:3000/oauth2/users/kakao";
 // const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`;
-const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=22cd6908590c582bad57a29459c75a6e&scope=profile_image%20account_email&state=LNDz-Z4GeTKTNaNMugPRpToxFTgjlCY76fzPmvh5hzk%3D&redirect_uri=http://localhost:3000/oauth/callback/kakao`;
 
 
 const Header = ({ title }) => {
@@ -68,18 +67,19 @@ const Header = ({ title }) => {
           // axios.get('http://localhost:3000/login/oauth2/code/kakao', { withCredentials: true }).then((res) => {
           //   console.log('res : ', res);
           // })
-
-          axios.post("http://localhost:8080/category"
-
-          )
+          console.log(`CLIENT_ID : ${CLIENT_ID}`);
+          console.log(`REDIRECT_URI : ${REDIRECT_URI}`);
+          axios.get(`https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`, { withCredentials: true }).then((res) => {
+            console.log('res : ', res);
+          })
 
         }}>LOGIN</MenuList>
 
       </Menu>
       {/* 클릭하면 kakao auth url로 이동하도록 해주세요!!  */}
-      <button href={KAKAO_AUTH_URL}>
+      {/* <button href={KAKAO_AUTH_URL}>
         <span>카카오계정 로그인</span>
-      </button>
+      </button> */}
 
       <input type="text" placeholder='리뷰 검색 창(임시)' />
 

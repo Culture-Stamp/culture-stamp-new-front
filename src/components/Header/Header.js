@@ -6,7 +6,7 @@ import axios from 'axios';
 
 const CLIENT_ID = "22cd6908590c582bad57a29459c75a6e";
 const REDIRECT_URI = "http://localhost:3000/oauth2/users/kakao";
-// const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 
 
 const Header = ({ title }) => {
@@ -51,7 +51,7 @@ const Header = ({ title }) => {
       console.log("category", res.data);
       setCategory(res.data);
     })
-  },[]);
+  }, []);
 
   return (
     <Head scrollActive={scrollActive ? '7vh' : ''}>
@@ -69,7 +69,7 @@ const Header = ({ title }) => {
           // })
           console.log(`CLIENT_ID : ${CLIENT_ID}`);
           console.log(`REDIRECT_URI : ${REDIRECT_URI}`);
-          axios.get(`https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`, { withCredentials: true }).then((res) => {
+          axios.post(`https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`, { withCredentials: true }).then((res) => {
             console.log('res : ', res);
           })
 
@@ -77,9 +77,12 @@ const Header = ({ title }) => {
 
       </Menu>
       {/* 클릭하면 kakao auth url로 이동하도록 해주세요!!  */}
-      {/* <button href={KAKAO_AUTH_URL}>
+      <button onClick={() => window.open(`${KAKAO_AUTH_URL}`, 'blank')}>
         <span>카카오계정 로그인</span>
-      </button> */}
+      </button>
+      <button onClick={() => window.open(`http://localhost:8080/oauth2/authorization/google`, 'blank')}>
+        <span>구글 로그인</span>
+      </button>
 
       <input type="text" placeholder='리뷰 검색 창(임시)' />
 

@@ -3,12 +3,14 @@ import "../../styles/slick.css";
 import "../../styles/slick-theme.css";
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import AddCategoryModal from "./AddCategoryModal";
+import DeleteCategoryModal from "../DeleteCategoryModal";
 
 function CategoryContainer ({category}) {
   
     const settings = {
       dots: false,
-      infinite: true,
+      infinite: false,
       speed: 500,
       slidesToShow: 1,
       slidesToScroll: 1
@@ -17,10 +19,15 @@ function CategoryContainer ({category}) {
     return (
         <div>
             <StyledSlider {...settings}>
-                {category.map((category) => {
-                  const link = `/${category.category_name}`;
-                  return <CategoryList to={link}>{category.category_name}</CategoryList>
-                })}
+                {category.map((category) => (
+                    <CategoryList to={{
+                      pathname: `/${category.categoryName}`}}
+                      key={category.id}>
+                        {category.categoryName}
+                    </CategoryList>
+                ))}
+                <AddCategoryModal text="카테고리 등록" />
+                <DeleteCategoryModal text="카테고리 삭제" category={category}/>
             </StyledSlider>
         </div>
     );
@@ -73,6 +80,7 @@ const CategoryList = styled(Link)`
   margin-right: 15px;
   text-decoration: none;
   color: #000;
-`;
+`
+
 
 export default CategoryContainer;

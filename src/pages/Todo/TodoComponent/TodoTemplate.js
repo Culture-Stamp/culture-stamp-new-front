@@ -20,7 +20,8 @@ function TodoTemplate() {
   //Todo 데이터 삭제하기 api
   const removeTodoData = (id) => {
     axios.delete(`http://localhost:8080/todo/${id}`).then(()=>{
-      console.log("Success Remove!")
+      console.log("Success Remove!");
+      getTodoData();
     })
   }
 

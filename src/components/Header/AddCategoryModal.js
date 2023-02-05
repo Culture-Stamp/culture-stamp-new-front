@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-function AddCategory () {  
+function AddCategoryModal({text}) {
     let subtitle;
     const [modalIsOpen, setIsOpen] = useState(false);
     const [category, setCategory] = useState("");
@@ -40,31 +40,39 @@ function AddCategory () {
         navigate("/");
       });
     }
-
+    
     return(
-      <div>
-        <div onClick={openModal}>+</div>
-        <Modal
-          isOpen={modalIsOpen}
-          onAfterOpen={afterOpenModal}
-          onRequestClose={closeModal}
-          style={customStyles}
-          contentLabel="Example Modal"
-        >
-          <Title>Add Category</Title>
-          <Form>
-            <Input placeholder="카테고리를 입력하세요" onChange={onChange} value={category} />
-            <ButtonPart>
-              <Submitbutton onClick={handleSubmit}>등록</Submitbutton>
-              <Submitbutton onClick={closeModal}>취소</Submitbutton>
-            </ButtonPart>
-          </Form>
-        </Modal>
-      </div>
-    );
+        <Container>
+            <div onClick={openModal}>{text}</div>
+            <Modal
+                isOpen={modalIsOpen}
+                onAfterOpen={afterOpenModal}
+                onRequestClose={closeModal}
+                style={customStyles}
+                contentLabel="Example Modal"
+            >
+                <Title>Add Category</Title>
+                <Form>
+                    <Input placeholder="카테고리를 입력하세요" onChange={onChange} value={category} />
+                    <ButtonPart>
+                    <Submitbutton onClick={handleSubmit}>등록</Submitbutton>
+                    <Submitbutton onClick={closeModal}>취소</Submitbutton>
+                    </ButtonPart>
+                </Form>
+            </Modal>
+        </Container>
+    )
 }
 
+
+
 // CSS
+const Container = styled.div`
+  text-decoration: none;
+  color: #000;
+  cursor: pointer;;
+`
+
 const customStyles = {
   content: {
     top: '50%',
@@ -74,8 +82,9 @@ const customStyles = {
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
   },
+  overlay: {zIndex: 1000}
 };
-
+  
 const Title = styled.h2`
   margin-top: 0;
 `;
@@ -115,4 +124,4 @@ const Submitbutton = styled.button`
   }
 `;
 
-export default AddCategory;
+export default AddCategoryModal;

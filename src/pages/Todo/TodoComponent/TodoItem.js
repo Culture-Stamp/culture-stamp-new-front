@@ -81,7 +81,7 @@ function TodoItem({todo, onRemove, onToggle, index, moveCard }) {
       >
         {content}
       </Topic>
-      <DeleteButton onClick={() => onRemove(index)}>
+      <DeleteButton onClick={() => onRemove(id)}>
         x
       </DeleteButton>
     </Container>

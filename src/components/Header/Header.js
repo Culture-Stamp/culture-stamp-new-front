@@ -3,11 +3,11 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import CategoryContainer from './CategoryContainer'
 import axios from 'axios';
+import { useCookies } from 'react-cookie';
 
-const CLIENT_ID = "22cd6908590c582bad57a29459c75a6e";
-const REDIRECT_URI = "http://localhost:3000/oauth2/users/kakao";
-const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`;
-
+// const CLIENT_ID = "22cd6908590c582bad57a29459c75a6e";
+// const REDIRECT_URI = "http://localhost:3000/oauth2/users/kakao";
+// const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 
 const Header = ({ title }) => {
   const [scrollY, setScrollY] = useState(0);
@@ -15,6 +15,9 @@ const Header = ({ title }) => {
   const [category, setCategory] = useState();
 
   const headerTitle = title.toUpperCase().split('').join(' ');
+
+  //쿠키
+  const [cookies, setCookie, removeCookie] = useCookies(['AUTH-TOKEN']);
 
   // 스크롤 움직임 확인하는 함수
   const scrollFixed = () => {
@@ -62,29 +65,13 @@ const Header = ({ title }) => {
         <MenuList to="/todo">TODO</MenuList>
         <MenuList to="/my-page">MYPAGE</MenuList>
         <MenuList onClick={() => {
-          // axios.get("http://ec2-3-35-144-181.ap-northeast-2.compute.amazonaws.com:8080/oauth2/authorization/google").then((res) => {
-          // axios.get('http://localhost:8080/oauth2/authorization/google').then((res) => {
-          // axios.get('http://localhost:3000/login/oauth2/code/kakao', { withCredentials: true }).then((res) => {
-          //   console.log('res : ', res);
-          // })
-          console.log(`CLIENT_ID : ${CLIENT_ID}`);
-          console.log(`REDIRECT_URI : ${REDIRECT_URI}`);
-          axios.post(`https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`, { withCredentials: true }).then((res) => {
-            console.log('res : ', res);
-          })
-
+          setCookie('test', 'test');
+          console.log('쿠키 값 가져오기');
+          console.log('test : ', cookies.test);
+          window.open(`http://localhost:8080/oauth2/authorization/google`, '구글 로그인', 'top=100, left=100, width=700, height=800');
         }}>LOGIN</MenuList>
 
       </Menu>
-      {/* 클릭하면 kakao auth url로 이동하도록 해주세요!!  */}
-      <button onClick={() => window.open(`${KAKAO_AUTH_URL}`, 'blank')}>
-        <span>카카오계정 로그인</span>
-      </button>
-      <button onClick={() => window.open(`http://localhost:8080/oauth2/authorization/google`, 'blank')}>
-        <span>구글 로그인</span>
-      </button>
-
-      <input type="text" placeholder='리뷰 검색 창(임시)' />
 
       {clickCT ? <CategoryContainer category={category} /> : null}
       <ButtonSection>

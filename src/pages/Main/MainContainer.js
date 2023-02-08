@@ -12,10 +12,10 @@ import Img8 from '../../assets/images/8.jpg';
 import Img9 from '../../assets/images/9.jpg';
 import Header from '../../components/Header/Header';
 
-function MainContainer({title}) {
+function MainContainer() {
   return (
     <MainBackground>
-      <Header title={title} />
+      <Header/>
       <MainSection>
         <Container>
           <Thumbnail>

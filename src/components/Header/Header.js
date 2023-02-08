@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import CategoryContainer from './CategoryContainer'
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
@@ -9,15 +9,16 @@ import { useCookies } from 'react-cookie';
 // const REDIRECT_URI = "http://localhost:3000/oauth2/users/kakao";
 // const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 
-const Header = ({ title }) => {
+const Header = () => {
   const [scrollY, setScrollY] = useState(0);
   const [scrollActive, setScrollActive] = useState(false);
   const [category, setCategory] = useState();
 
-  const headerTitle = title.toUpperCase().split('').join(' ');
-
   //쿠키
   const [cookies, setCookie, removeCookie] = useCookies(['AUTH-TOKEN']);
+
+  // 페이지 이동
+  const navigate = useNavigate();
 
   // 스크롤 움직임 확인하는 함수
   const scrollFixed = () => {
@@ -35,6 +36,11 @@ const Header = ({ title }) => {
   // 카테고리 눌렀을 때
   const handleCategory = () => {
     setClickCT(!clickCT);
+  }
+
+  // 메인 페이지로 이동
+  const handleMain = () => {
+    navigate("/");
   }
 
   // 스크롤 감지 시 scrollFixed 함수 실행
@@ -58,26 +64,31 @@ const Header = ({ title }) => {
 
   return (
     <Head scrollActive={scrollActive ? '7vh' : ''}>
-      <Title>{headerTitle}</Title>
+      <Title onClick={handleMain}>C U L T U R E S T A M P</Title>
       <Menu>
         <MenuList onClick={handleCategory}>CATEGORY</MenuList>
         <MenuList to="/date">DATE</MenuList>
         <MenuList to="/todo">TODO</MenuList>
         <MenuList to="/my-page">MYPAGE</MenuList>
-        <MenuList onClick={() => {
-          setCookie('test', 'test');
-          console.log('쿠키 값 가져오기');
-          console.log('test : ', cookies.test);
-          window.open(`http://localhost:8080/oauth2/authorization/google`, '구글 로그인', 'top=100, left=100, width=700, height=800');
-        }}>LOGIN</MenuList>
-
+        <MenuList
+          onClick={() => {
+            setCookie('test', 'test');
+            console.log('쿠키 값 가져오기');
+            console.log('test : ', cookies.test);
+            window.open(
+              `http://localhost:8080/oauth2/authorization/google`,
+              '구글 로그인',
+              'top=100, left=100, width=700, height=800',
+            );
+          }}
+        >
+          LOGIN
+        </MenuList>
       </Menu>
 
       {clickCT ? <CategoryContainer category={category} /> : null}
       <ButtonSection>
-        <AddReviewButton>
-          +
-        </AddReviewButton>
+        <AddReviewButton>+</AddReviewButton>
       </ButtonSection>
     </Head>
   );
@@ -97,6 +108,7 @@ const Title = styled.span`
   width: 100vw;
   font-size: 17px;
   font-weight: 600;
+  cursor: pointer;
 `;
 
 // 메뉴 부분

@@ -9,7 +9,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<MainContainer title="C U L T U R E S T A M P"/>} />
+        <Route path="/" element={<MainContainer/>} />
         <Route path="/todo" element={<TodoContainer />} />
         <Route path="/:category" element={<CategoryContainer />} />
       </Routes>

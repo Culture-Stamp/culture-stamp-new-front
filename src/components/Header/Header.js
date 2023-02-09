@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import CategoryContainer from './CategoryContainer'
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
+import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
 
 // const CLIENT_ID = "22cd6908590c582bad57a29459c75a6e";
 // const REDIRECT_URI = "http://localhost:3000/oauth2/users/kakao";
@@ -17,7 +18,7 @@ const Header = ({ title }) => {
   const headerTitle = title.toUpperCase().split('').join(' ');
 
   //쿠키
-  const [cookies, setCookie, removeCookie] = useCookies(['AUTH-TOKEN']);
+  const [cookies, setCookie, removeCookie] = useCookies(['auth']);
 
   // 스크롤 움직임 확인하는 함수
   const scrollFixed = () => {
@@ -56,8 +57,19 @@ const Header = ({ title }) => {
     })
   }, []);
 
+  //클라이언트 ID (환경변수)
+  let googleClientId = '398701196846-1n8sr22rc55etti1cedf9qvnaovpfb4q.apps.googleusercontent.com';
+  //사용자 정보를 담아둘 userObj
+  const [userObj, setUserObj] = useState({});
+  //로그인 성공시 res처리
+  const onLoginSuccess = (res) => {
+    console.log('res : ', res);
+  }
+
+
   return (
     <Head scrollActive={scrollActive ? '7vh' : ''}>
+
       <Title>{headerTitle}</Title>
       <Menu>
         <MenuList onClick={handleCategory}>CATEGORY</MenuList>
@@ -65,13 +77,27 @@ const Header = ({ title }) => {
         <MenuList to="/todo">TODO</MenuList>
         <MenuList to="/my-page">MYPAGE</MenuList>
         <MenuList onClick={() => {
-          setCookie('test', 'test');
-          console.log('쿠키 값 가져오기');
-          console.log('test : ', cookies.test);
-          window.open(`http://localhost:8080/oauth2/authorization/google`, '구글 로그인', 'top=100, left=100, width=700, height=800');
+          axios.post('http://localhost:8080/oauth/login/google').then((res) => {
+            console.log('res : ', res);
+          })
         }}>LOGIN</MenuList>
-
       </Menu>
+
+      <GoogleOAuthProvider clientId={googleClientId}>
+        <GoogleLogin
+          buttonText="google login"
+          onSuccess={(credentialResponse) => {
+            console.log('sucess');
+            console.log('credentialResponse  : ', credentialResponse);
+          }}
+          onError={() => {
+            console.log("failed");
+          }}
+        >
+
+        </GoogleLogin>
+
+      </GoogleOAuthProvider>
 
       {clickCT ? <CategoryContainer category={category} /> : null}
       <ButtonSection>
@@ -82,8 +108,8 @@ const Header = ({ title }) => {
     </Head>
   );
 }
-// CSS
 
+// CSS
 // head부분
 const Head = styled.header`
   position: fixed;

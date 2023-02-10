@@ -3,8 +3,6 @@ import "../../styles/slick.css";
 import "../../styles/slick-theme.css";
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import AddCategoryModal from "./AddCategoryModal";
-import DeleteCategoryModal from "../DeleteCategoryModal";
 
 function CategoryContainer ({category}) {
   
@@ -12,7 +10,7 @@ function CategoryContainer ({category}) {
       dots: false,
       infinite: false,
       speed: 500,
-      slidesToShow: 1,
+      slidesToShow: 5,
       slidesToScroll: 1
     };
 
@@ -26,8 +24,8 @@ function CategoryContainer ({category}) {
                         {category.categoryName}
                     </CategoryList>
                 ))}
-                <AddCategoryModal text="카테고리 등록" />
-                <DeleteCategoryModal text="카테고리 삭제" category={category}/>
+                {/* <AddCategoryModal text="카테고리 등록" />
+                <DeleteCategoryModal text="카테고리 삭제" category={category}/> */}
             </StyledSlider>
         </div>
     );
@@ -38,7 +36,7 @@ const StyledSlider = styled(Slider)`
 
   .slick-list {
     //슬라이드 스크린
-    width: 10%;
+    width: 30%;
     height: 100%;
     margin: 0 auto;
     overflow-x: hidden;
@@ -61,14 +59,14 @@ const StyledSlider = styled(Slider)`
   }
 
   .slick-prev {
-    left: 42% !important;
+    left: 32% !important;
     z-index: 1;
     @media (max-width: 720px) {
       left: 32% !important;
     }
   }
-  .slick-next {
-    right: 42% !important;
+  .slick-next {E
+    right: 32% !important;
     z-index: 1;
     @media (max-width: 720px) {
       right: 32% !important;

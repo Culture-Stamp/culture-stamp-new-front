@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Link, useNavigate } from 'react-router-dom';
-import CategoryContainer from './CategoryContainer'
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
+import CategoryContainer from '../Header/CategoryContainer';
 
 // const CLIENT_ID = "22cd6908590c582bad57a29459c75a6e";
 // const REDIRECT_URI = "http://localhost:3000/oauth2/users/kakao";

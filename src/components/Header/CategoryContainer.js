@@ -65,7 +65,7 @@ const StyledSlider = styled(Slider)`
       left: 32% !important;
     }
   }
-  .slick-next {E
+  .slick-next {
     right: 32% !important;
     z-index: 1;
     @media (max-width: 720px) {

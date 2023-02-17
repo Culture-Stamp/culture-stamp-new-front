@@ -120,6 +120,7 @@ const Head = styled.header`
   padding-top: ${(props) => props.scrollActive || '15vh'};
   z-index: 999;
   background-color: #e5e7eb;
+  text-align: center;
 `;
 
 const Title = styled.span`

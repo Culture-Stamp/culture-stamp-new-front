@@ -48,12 +48,12 @@ function MyPageContainer() {
         <MainBackground>
             <Header/>
             <MainSection>
-                <section>
+                <section className='mainPart'>
                     <h2>카테고리 등록</h2>
                     <input type="text" onChange={handleCategoryChange}/>
                     <button onClick={handleSubmit}>등록</button>
                 </section>
-                <section>
+                <section className='mainPart'>
                     <h2>카테고리 목록</h2>
                     {category.map((category) => (
                         <CategoryList to={{
@@ -78,7 +78,6 @@ const MainBackground = styled.div`
     width: 100vw;
     height: 100%;
     margin-left: calc(-50vw + 50%);
-    text-align: center;
     background: #e5e7eb;
 `;
 
@@ -89,6 +88,17 @@ const MainSection = styled.section`
     max-width: 93.5rem;
     margin: 0 auto;
     padding: 0 2rem;
+
+    h2 {
+        margin-top: 0;
+    }
+
+    .mainPart {
+        margin: 20px 0;
+        padding: 10px;
+        background-color: #fff;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    }
 `;
 
 const CategoryList = styled.li`

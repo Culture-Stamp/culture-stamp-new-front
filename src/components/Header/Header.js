@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, Route, Routes, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
 import CategoryContainer from '../Header/CategoryContainer';
+import TodoContainer from '../../pages/Todo/TodoContainer';
+import MyPageContainer from '../../pages/MyPage/MyPageContainer';
 
 // const CLIENT_ID = "22cd6908590c582bad57a29459c75a6e";
 // const REDIRECT_URI = "http://localhost:3000/oauth2/users/kakao";
@@ -82,9 +84,7 @@ const Header = () => {
         <MenuList to="/todo">TODO</MenuList>
         <MenuList to="/my-page">MYPAGE</MenuList>
         <MenuList onClick={() => {
-          axios.post('http://localhost:8080/oauth/login/google').then((res) => {
-            console.log('res : ', res);
-          })
+          alert('준비 중');
         }}>LOGIN</MenuList>
       </Menu>
 
@@ -115,11 +115,10 @@ const Header = () => {
 // CSS
 // head부분
 const Head = styled.header`
-  position: fixed;
-  top: 0;
-  padding-top: ${(props) => props.scrollActive || '15vh'};
+  position: sticky;
+  margin-top : 150px;
+  // padding-top: ${(props) => props.scrollActive || '15vh'};
   z-index: 999;
-  background-color: #e5e7eb;
   text-align: center;
 `;
 

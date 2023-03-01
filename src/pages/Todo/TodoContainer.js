@@ -3,20 +3,19 @@ import Header from '../../components/Header/Header';
 import TodoTemplate from './TodoComponent/TodoTemplate';
 
 function TodoContainer() {
-    return (
-      <MainBackground>
-        <Header title="todo" />
-        <MainSection>
-          <Container>
-            <Thumbnail>
-              <ThumbnailItem>
-                <TodoTemplate />
-              </ThumbnailItem>
-            </Thumbnail>
-          </Container>
-        </MainSection>
-      </MainBackground>
-    );
+  return (
+    <MainBackground>
+      <MainSection>
+        <Container>
+          <Thumbnail>
+            <ThumbnailItem>
+              <TodoTemplate />
+            </ThumbnailItem>
+          </Thumbnail>
+        </Container>
+      </MainSection>
+    </MainBackground>
+  );
 }
 
 

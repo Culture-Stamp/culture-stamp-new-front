@@ -94,6 +94,7 @@ const Header = () => {
           onSuccess={(credentialResponse) => {
             console.log('sucess');
             console.log('credentialResponse  : ', credentialResponse);
+            setCookie('auth', credentialResponse);
           }}
           onError={() => {
             console.log("failed");

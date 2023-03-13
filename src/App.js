@@ -5,12 +5,14 @@ import CategoryContainer from './pages/Category/CategoryContainer';
 import GlobalStyle from './styles/GlobalStyle';
 import TodoContainer from './pages/Todo/TodoContainer';
 import MyPageContainer from './pages/MyPage/MyPageContainer';
+import ReviewContainer from './pages/Main/ReviewContainer';
 
 function App() {
   return (
     <>
       <Routes>
         <Route path="/" element={<MainContainer />} />
+        <Route path="/review/:id" element={<ReviewContainer />} />
         <Route path="/todo" element={<TodoContainer />} />
         <Route path="/:category" element={<CategoryContainer />} />
         <Route path="/my-page" element={<MyPageContainer />} />

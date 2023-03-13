@@ -2,7 +2,6 @@ import axios from 'axios';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
-import styles from '../../styles/MainContainer.module.css';
 
 function MainContainer() {
   let navigate = useNavigate();

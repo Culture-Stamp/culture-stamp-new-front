@@ -93,7 +93,7 @@ const Header = () => {
           buttonText="google login"
           onSuccess={(credentialResponse) => {
             console.log('sucess');
-            console.log('credentialResponse  : ', credentialResponse);
+            console.log('credentialResponse  : ',);
             setCookie('auth', credentialResponse);
           }}
           onError={() => {

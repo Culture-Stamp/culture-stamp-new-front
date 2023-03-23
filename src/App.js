@@ -6,6 +6,7 @@ import GlobalStyle from './styles/GlobalStyle';
 import TodoContainer from './pages/Todo/TodoContainer';
 import MyPageContainer from './pages/MyPage/MyPageContainer';
 import ReviewContainer from './pages/Main/ReviewContainer';
+import Review from './pages/Main/Review';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<MainContainer />} />
         <Route path="/review/:id" element={<ReviewContainer />} />
+        <Route path="/review" element={<Review />} />
         <Route path="/todo" element={<TodoContainer />} />
         <Route path="/:category" element={<CategoryContainer />} />
         <Route path="/my-page" element={<MyPageContainer />} />

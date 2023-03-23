@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { useEffect } from 'react';
-import { useState } from 'react';
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { TiPlus } from 'react-icons/ti';
 
 function MainContainer() {
   let navigate = useNavigate();
@@ -18,11 +18,11 @@ function MainContainer() {
   }, [page]);
 
   useEffect(() => {
-    // axios.get(`http://localhost:8080/oauth/user/info`, { withCredentials: true }).then((res) => {
-    //   console.log('res : ', res.data);
-    //   setId(res.data.nickname);
-    //   setEmail(res.data.email);
-    // })
+    axios.get(`http://localhost:8080/oauth/user/info`, { withCredentials: true }).then((res) => {
+      console.log('res : ', res.data);
+      setId(res.data.nickname);
+      setEmail(res.data.email);
+    })
   }, [])
 
 
@@ -31,10 +31,12 @@ function MainContainer() {
       로그인 정보 <br />
       이메일 : {email} <br />
       닉넴 : {id}
+      <div className='text-end'>
+        <TiPlus className='h1 pointer' onClick={() => navigate("/review")} />
+      </div>
       <div className='row row-cols-3'>
         {
           list.map((review, i) => {
-            console.log('review : ', review);
             return (
               <div className='col' key={i}>
                 <Link to={`/review/${review.reviewId}`}>

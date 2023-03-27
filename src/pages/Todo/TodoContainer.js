@@ -31,8 +31,6 @@ const MainBackground = styled.div`
 // 메인 부분
 const MainSection = styled.section`
   position: relative;
-  top: 310px;
-  //top: 50px;
   max-width: 93.5rem;
   margin: 0 auto;
   padding: 0 2rem;

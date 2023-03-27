@@ -1,6 +1,7 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend'
+import { HTML5Backend } from 'react-dnd-html5-backend';
+import styled from 'styled-components';
 import TodoInsert from './TodoInsert';
 import TodoItemList from './TodoItemList';
 import update from 'immutability-helper'

@@ -2,7 +2,6 @@ import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
 import React, { useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
-import jwtDecode from 'jwt-decode';
 import axios from 'axios';
 
 const Login = () => {

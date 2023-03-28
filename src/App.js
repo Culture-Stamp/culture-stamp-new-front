@@ -13,7 +13,7 @@ import Login from './pages/Login';
 
 function App() {
   const cookies = useCookies(['auth']);
-  // console.log('cookies : ', cookies);
+  console.log('cookies : ', cookies);
   const token = cookies.auth;
 
   // console.log('token : ', token);

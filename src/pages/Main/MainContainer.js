@@ -11,8 +11,8 @@ function MainContainer() {
 
   let [id, setId] = useState('');
   let [email, setEmail] = useState('');
-  
-  
+
+
   //리스트조회
   useEffect(() => {
     async function fetchData() {
@@ -22,23 +22,13 @@ function MainContainer() {
     }
     fetchData();
   }, []);
-  
-  // useEffect(() => {
-  //   axios.get(`http://localhost:8080/review?page=${page}`).then((res) => {
-  //     setList(res.data.content);
-  //   })
-  // }, []);
-
-
 
 
   useEffect(() => {
     // 사용자 정보
-    // axios.get(`http://localhost:8080/oauth/user/info`, { withCredentials: true }).then((res) => {
-    //   console.log('res : ', res.data);
-    //   setId(res.data.nickname);
-    //   setEmail(res.data.email);
-    // })
+    axios.get(`http://localhost:8080/oauth/user/info`, { withCredentials: true }).then((res) => {
+      console.log('res : ', res.data);
+    })
   }, [])
 
 
@@ -50,9 +40,9 @@ function MainContainer() {
       <div className='text-end'>
         <TiPlus className='h1 pointer' onClick={() => navigate("/review")} />
       </div>
-      
-        {
-          list.length > 0 ?
+
+      {
+        list.length > 0 ?
           list.map((review, i) => {
             return (
               <div className='row row-cols-3'>
@@ -68,8 +58,8 @@ function MainContainer() {
           <div className='text-center mt-5'>
             <h3>Not exist review data</h3>
           </div>
-        }
-      
+      }
+
     </div>
   );
 }

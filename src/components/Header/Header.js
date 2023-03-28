@@ -1,27 +1,19 @@
-import { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import { Link, Route, Routes, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
-import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
-import CategoryContainer from '../Header/CategoryContainer';
-import TodoContainer from '../../pages/Todo/TodoContainer';
-import MyPageContainer from '../../pages/MyPage/MyPageContainer';
+import { Link, useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 
-// const CLIENT_ID = "22cd6908590c582bad57a29459c75a6e";
-// const REDIRECT_URI = "http://localhost:3000/oauth2/users/kakao";
-// const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+import CategoryContainer from '../Header/CategoryContainer';
 
 const Header = () => {
   const [scrollY, setScrollY] = useState(0);
   const [scrollActive, setScrollActive] = useState(false);
   const [category, setCategory] = useState();
 
-  //쿠키
-  const [cookies, setCookie, removeCookie] = useCookies(['auth']);
-
   // 페이지 이동
   const navigate = useNavigate();
+  const [cookies, setCookie,removeCookie] = useCookies('auth');
 
   // 스크롤 움직임 확인하는 함수
   const scrollFixed = () => {
@@ -65,14 +57,6 @@ const Header = () => {
     })
   }, []);
 
-  //클라이언트 ID (환경변수)
-  let googleClientId = '398701196846-1n8sr22rc55etti1cedf9qvnaovpfb4q.apps.googleusercontent.com';
-  //사용자 정보를 담아둘 userObj
-  const [userObj, setUserObj] = useState({});
-  //로그인 성공시 res처리
-  const onLoginSuccess = (res) => {
-    console.log('res : ', res);
-  }
 
 
   return (
@@ -84,26 +68,12 @@ const Header = () => {
         <MenuList to="/todo">TODO</MenuList>
         <MenuList to="/my-page">MYPAGE</MenuList>
         <MenuList onClick={() => {
-          alert('준비 중');
-        }}>LOGIN</MenuList>
+          removeCookie('auth');
+          navigate('/login');
+        }}>LOGOUT</MenuList>
       </Menu>
 
-      <GoogleOAuthProvider clientId={googleClientId}>
-        <GoogleLogin
-          buttonText="google login"
-          onSuccess={(credentialResponse) => {
-            console.log('sucess');
-            console.log('credentialResponse  : ',);
-            setCookie('auth', credentialResponse);
-          }}
-          onError={() => {
-            console.log("failed");
-          }}
-        >
 
-        </GoogleLogin>
-
-      </GoogleOAuthProvider>
 
       {clickCT ? <CategoryContainer category={category} /> : null}
       <ButtonSection>

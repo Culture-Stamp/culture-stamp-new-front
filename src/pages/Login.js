@@ -1,8 +1,9 @@
-import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
-import React, { useEffect } from 'react';
+import { GoogleLogin } from '@react-oauth/google';
+import jwt_decode from "jwt-decode";
+import React from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+
 
 const Login = () => {
   const [cookies, setCookie, removeCookie] = useCookies(['auth']);
@@ -10,33 +11,30 @@ const Login = () => {
   const googleClientId = '398701196846-1n8sr22rc55etti1cedf9qvnaovpfb4q.apps.googleusercontent.com';
   const navigate = useNavigate();
 
-  useEffect(() => {
+  // useEffect(() => {
     // // 사용자 정보
-    axios.get(`http://localhost:8080/oauth/user/info`, { withCredentials: true }).then((res) => {
-      console.log('res : ', res.data);
-    })
-  }, [])
+    // axios.get(`http://localhost:8080/oauth/user/info`, { withCredentials: true }).then((res) => {
+      // console.log('@#%@$^@$%^ : ', res.data);
+    // })
+  // }, [])
+
 
   return (
-    <>
+
       <div>
-        <GoogleOAuthProvider clientId={googleClientId}>
-          <GoogleLogin
-            buttonText="google login"
-            onSuccess={(credentialResponse) => {
-              console.log('sucess');
-              console.log('credentialResponse  : ', credentialResponse);
-              setCookie('auth', credentialResponse.credential);
-              navigate('/');
-            }}
-            onError={() => {
-              console.log('failed');
-            }}
-          ></GoogleLogin>
-        </GoogleOAuthProvider>
+
+        <GoogleLogin
+          onSuccess={credentialResponse => {
+            console.log(credentialResponse.credential);
+            var decoded = jwt_decode(credentialResponse.credential);
+            console.log('decode : ', decoded);
+          }}
+          onError={() => {
+            console.log('Login Failed');
+          }}
+        />;
       </div>
-    </>
-  )
+    )
 }
 
 export default Login

@@ -9,9 +9,6 @@ function MainContainer() {
   const [list, setList] = useState([]);
   let [page, setPage] = useState(0);
 
-  let [id, setId] = useState('');
-  let [email, setEmail] = useState('');
-
 
   //리스트조회
   useEffect(() => {
@@ -27,16 +24,13 @@ function MainContainer() {
   useEffect(() => {
     // 사용자 정보
     axios.get(`http://localhost:8080/oauth/user/info`, { withCredentials: true }).then((res) => {
-      console.log('res : ', res.data);
+      // console.log('res : ', res.data);
     })
   }, [])
 
 
   return (
     <div className='container text-center'>
-      {/* 로그인 정보 <br />
-      이메일 : {email} <br />
-      닉넴 : {id} */}
       <div className='text-end'>
         <TiPlus className='h1 pointer' onClick={() => navigate("/review")} />
       </div>

@@ -1,19 +1,42 @@
+import { useGoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useCookies } from 'react-cookie';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-
 import CategoryContainer from '../Header/CategoryContainer';
+import { useSelector } from "react-redux"
+import { loginUser } from "./../../store.js"
+
 
 const Header = () => {
+
+  //store 정보 불러오기
+  let user = useSelector((state) => {return state.user});
+
+  console.log('user : ', user);
+  //로그인
+  const login = useGoogleLogin({
+    onSuccess: async response => {
+      try {
+        const res = await axios.get("https://www.googleapis.com/oauth2/v3/userinfo",{
+          headers:{
+            "Authorization":`Bearer ${response.access_token}`
+          }
+        })
+        console.log('res : ', res.data);
+      } catch (error) {
+        console.log('error : ', error);
+      }
+    },
+  });
+
+
   const [scrollY, setScrollY] = useState(0);
   const [scrollActive, setScrollActive] = useState(false);
   const [category, setCategory] = useState();
 
   // 페이지 이동
   const navigate = useNavigate();
-  const [cookies, setCookie,removeCookie] = useCookies('auth');
 
   // 스크롤 움직임 확인하는 함수
   const scrollFixed = () => {
@@ -67,10 +90,8 @@ const Header = () => {
         <MenuList to="/date">DATE</MenuList>
         <MenuList to="/todo">TODO</MenuList>
         <MenuList to="/my-page">MYPAGE</MenuList>
-        <MenuList onClick={() => {
-          removeCookie('auth');
-          navigate('/login');
-        }}>LOGOUT</MenuList>
+        <MenuList onClick={login}>LOGIN</MenuList>
+        {/* <MenuList onClick={logout}>LOGOUT</MenuList> */}
       </Menu>
 
 

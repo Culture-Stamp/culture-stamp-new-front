@@ -21,14 +21,6 @@ function MainContainer() {
   }, []);
 
 
-  useEffect(() => {
-    // 사용자 정보
-    axios.get(`http://localhost:8080/oauth/user/info`, { withCredentials: true }).then((res) => {
-      // console.log('res : ', res.data);
-    })
-  }, [])
-
-
   return (
     <div className='container text-center'>
       <div className='text-end'>

@@ -1,34 +1,26 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit'
 
 let user = createSlice({
-  name : 'user',
+  name: 'user',
   initialState: {
-    name : 'name',
-    email : 'mmailamilamil',
+    name: '',
+    email: '',
   },
   reducers: {
-    loginUser(state, action){
-      let user = {
-        name : action.payload.name,
-        email : action.payload.email,
-      }
-      state.push(user);
+    setName(state, action) {
+      state.name = action.payload;
     },
-    logoutUser(state){
-      let user = {
-        name : '',
-        email : '',
-      }
-      state.push(user);
+    setEmail(state, action) {
+      state.email = action.payload;
     },
   }
 })
 
-export let {loginUser, logoutUser} = user.actions;
+export let { setName, setEmail } = user.actions;
 
 export default configureStore({
   reducer: {
     //여기에 등록해야 사용 가능
-    user : user.reducer
+    user: user.reducer
   }
 }) 

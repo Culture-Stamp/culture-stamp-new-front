@@ -1,29 +1,27 @@
 import { useGoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { setEmail, setName } from '../../store.js';
 import CategoryContainer from '../Header/CategoryContainer';
-import { useSelector } from "react-redux"
-import { loginUser } from "./../../store.js"
-
 
 const Header = () => {
+  let dispatch = useDispatch();
 
-  //store 정보 불러오기
-  let user = useSelector((state) => {return state.user});
 
-  console.log('user : ', user);
   //로그인
   const login = useGoogleLogin({
     onSuccess: async response => {
       try {
-        const res = await axios.get("https://www.googleapis.com/oauth2/v3/userinfo",{
-          headers:{
-            "Authorization":`Bearer ${response.access_token}`
+        const res = await axios.get("https://www.googleapis.com/oauth2/v3/userinfo", {
+          headers: {
+            "Authorization": `Bearer ${response.access_token}`
           }
         })
-        console.log('res : ', res.data);
+        dispatch(setEmail(res.data.email));
+        dispatch(setName(res.data.name));
       } catch (error) {
         console.log('error : ', error);
       }

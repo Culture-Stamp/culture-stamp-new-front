@@ -8,27 +8,27 @@ import MyPageContainer from './pages/MyPage/MyPageContainer';
 import ReviewContainer from './pages/Main/ReviewContainer';
 import Review from './pages/Main/Review';
 import PrivateRoute from './components/PrivateRoute';
+import { useSelector } from 'react-redux';
 
 function App() {
+  const user = useSelector((state) => { return state.user });
+
   return (
     <>
       <Routes>
-          <Route path="/" element={<MainContainer />} />
-          {/* <Route path="/" element={<PrivateRoute component={<MainContainer />} authenticated={token} />} /> */}
-          <Route path="/review/:id" element={<ReviewContainer />} />
-          <Route path="/review" element={<Review />} />
-          <Route path="/todo" element={<TodoContainer />} />
-          <Route path="/:category" element={<CategoryContainer />} />
-          <Route path="/my-page" element={<MyPageContainer />} />
-          {/* <Route path="/login" element={<Login />} /> */}
+        <Route path="/" element={<MainContainer />} />
+        <Route path="/review/:id" element={<ReviewContainer />} />
+        <Route path="/review" element={<Review />} />
+        <Route path="/todo" element={<TodoContainer />} />
+        <Route path="/:category" element={<CategoryContainer />} />
+        <Route path="/my-page" element={<MyPageContainer />} />
 
-          {/* <Route path="/" element={<PrivateRoute component={<MainContainer />} authenticated={token} />} />
-          <Route path="/review/:id" element={<PrivateRoute component={<ReviewContainer />} authenticated={token} />} />
-          <Route path="/review" element={<PrivateRoute component={<Review />} authenticated={token} />} />
-          <Route path="/todo" element={<PrivateRoute component={<TodoContainer />} authenticated={token} />} />
-          <Route path="/:category" element={<PrivateRoute component={<CategoryContainer />} authenticated={token} />} />
-          <Route path="/my-page" element={<PrivateRoute component={<MyPageContainer />} authenticated={token} />} />
-          <Route path="/login" element={<Login />} /> */}
+        {/* <Route path="/" />
+        <Route path="/review/:id" element={<PrivateRoute component={<ReviewContainer />} authenticated={user} />} />
+        <Route path="/review" element={<PrivateRoute component={<Review />} authenticated={user} />} />
+        <Route path="/todo" element={<PrivateRoute component={<TodoContainer />} authenticated={user} />} />
+        <Route path="/:category" element={<PrivateRoute component={<CategoryContainer />} authenticated={user} />} />
+        <Route path="/my-page" element={<PrivateRoute component={<MyPageContainer />} authenticated={user} />} /> */}
       </Routes>
       <GlobalStyle />
     </>

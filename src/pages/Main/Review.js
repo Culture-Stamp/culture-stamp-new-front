@@ -44,6 +44,14 @@ const Review = () => {
 					</Form.Group>
 					<Form.Group as={Row} className="mb-3" controlId="title">
 						<Form.Label column lg="2">
+							<h3>Image</h3>
+						</Form.Label>
+						<Col lg="10">
+							<Form.Control type="file" size='lg' />
+						</Col>
+					</Form.Group>
+					<Form.Group as={Row} className="mb-3" controlId="title">
+						<Form.Label column lg="2">
 							<h3>Memo</h3>
 						</Form.Label>
 						<Col lg="10">

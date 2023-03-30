@@ -1,7 +1,7 @@
 import { useGoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { setEmail, setName } from '../../store.js';
@@ -9,7 +9,9 @@ import CategoryContainer from '../Header/CategoryContainer';
 
 const Header = () => {
   let dispatch = useDispatch();
+  const user = useSelector((state) => { return state.user });
 
+  console.log('user : ', user);
 
   //로그인
   const login = useGoogleLogin({
@@ -20,6 +22,7 @@ const Header = () => {
             "Authorization": `Bearer ${response.access_token}`
           }
         })
+        console.log('res : ', res.data);
         dispatch(setEmail(res.data.email));
         dispatch(setName(res.data.name));
       } catch (error) {

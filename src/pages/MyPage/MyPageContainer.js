@@ -2,13 +2,11 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { TiDelete } from 'react-icons/ti';
-import { useSelector } from 'react-redux';
 
 function MyPageContainer() {
   const [newCategory, setNewCategory] = useState('');
   const [category, setCategory] = useState([]); // 카테고리 목록 데이터
   let categoryName = []; // 카테고리 이름 배열
-  const user = useSelector((state) => { return state.user });
 
   category.map((res) => {
     categoryName.push(res.categoryName);
@@ -28,7 +26,7 @@ function MyPageContainer() {
         .post('http://localhost:8080/category', {
           categoryName: newCategory,
           reviewCount: 0,
-          email: `${user.email}`,
+          userId: 1,
         })
         .then(() => {
           alert('새 카테고리를 등록했습니다.');

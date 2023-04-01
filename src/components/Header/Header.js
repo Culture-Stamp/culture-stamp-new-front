@@ -23,9 +23,7 @@ const Header = () => {
           }
         })
 
-        // test(res.data);
-        console.log('response : ', response);
-
+        test(res.data);
 
         //구분
         dispatch(setEmail(res.data.email));
@@ -37,27 +35,27 @@ const Header = () => {
   });
 
 
-  // const test = async (data) => {
-  //   const user = {
-  //     'email': data.email,
-  //     'email_verified': data.email_verified,
-  //     'given_name': data.given_name,
-  //     'locale': data.locale,
-  //     'name': data.name,
-  //     'picture': data.picture,
-  //     'sub': data.sub,
-  //   };
+  const test = async (data) => {
+    const user = {
+      'email': data.email,
+      'email_verified': data.email_verified,
+      'given_name': data.given_name,
+      'locale': data.locale,
+      'name': data.name,
+      'picture': data.picture,
+      'sub': data.sub,
+    };
 
-  //   console.log('user : ', user);
-  //   try {
-  //     const res = await axios.get(`http://localhost:8080/oauth/test`, { user });
-  //     console.log('res : ', res);
+    console.log('user : ', user);
+    try {
+      const res = await axios.get(`http://localhost:8080/oauth/test`, { user });
+      console.log('23412343 : ', res);
 
-  //   } catch (error) {
-  //     console.log('err : ', error);
-  //     throw error.response.data;
-  //   }
-  // }
+    } catch (error) {
+      console.log('err : ', error);
+      throw error.response.data;
+    }
+  }
 
   const [scrollY, setScrollY] = useState(0);
   const [scrollActive, setScrollActive] = useState(false);
@@ -108,7 +106,6 @@ const Header = () => {
       setCategory(res.data);
     })
   }, []);
-
 
 
   return (

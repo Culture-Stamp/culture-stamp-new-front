@@ -1,13 +1,11 @@
 import axios from 'axios';
 import { useEffect, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 function TodoInsert({ getTodoData }) {
 
   const [content, setContent] = useState("");
   const ref = useRef();
-  const user = useSelector((state) => { return state.user });
 
   // 이벤트가 발생할 때마다(글자가 하나씩 입력될 때 마다) 변화를 감지
   const handleChange = (e) => {
@@ -23,7 +21,7 @@ function TodoInsert({ getTodoData }) {
     }
     // 로그인 기능 구현 후 데이터 수정하기
     axios.post('http://localhost:8080/todo', {
-      email: `${user.email}`,
+      userId: 1,
       content: content,
       doneFlag: 0,
     })

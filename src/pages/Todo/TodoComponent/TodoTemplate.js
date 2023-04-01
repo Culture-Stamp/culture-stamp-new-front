@@ -6,15 +6,13 @@ import TodoInsert from './TodoInsert';
 import TodoItemList from './TodoItemList';
 import update from 'immutability-helper'
 import axios from 'axios';
-import { useSelector } from 'react-redux';
 
 function TodoTemplate() {
   const [todos, setTodos] = useState([]);
-  const user = useSelector((state) => { return state.user });
 
   // todo 데이터 가져오기 api 
   const getTodoData = () => {
-    axios.get(`http://localhost:8080/todo?email=${user.email}`).then((res) => {
+    axios.get("http://localhost:8080/todo").then((res) => {
       console.log("res", res.data);
       setTodos(res.data);
     })

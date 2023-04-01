@@ -1,64 +1,66 @@
 import axios from 'axios';
 import { useEffect, useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
-function TodoInsert({getTodoData}){
-    
-    const [content, setContent] = useState("");
-    const ref = useRef();
+function TodoInsert({ getTodoData }) {
 
-    // 이벤트가 발생할 때마다(글자가 하나씩 입력될 때 마다) 변화를 감지
-    const handleChange = (e) => {
-      setContent(e.target.value);
-    };
+  const [content, setContent] = useState("");
+  const ref = useRef();
+  const user = useSelector((state) => { return state.user });
 
-    const handleSubmit = (content) => (event) => {
-      event.preventDefault(); // onSubmit 이벤트는 브라우저를 새로고치기 때문에 막아주기
-  
-      // 만약 input 창이 빈채로 submit을 하려고 할 땐 return시키기
-      if (!content) {
-        return alert("todo를 입력해주세요!");
-      }
-      // 로그인 기능 구현 후 데이터 수정하기
-      axios.post('http://localhost:8080/todo', {
-          userId: 1,
-          content: content,
-          doneFlag: 0,
-        })
-        .then(() => {
-          setContent(''); // submit을 한 후에는 input 창을 비우기
-          getTodoData();
-        });
-    };;
+  // 이벤트가 발생할 때마다(글자가 하나씩 입력될 때 마다) 변화를 감지
+  const handleChange = (e) => {
+    setContent(e.target.value);
+  };
 
-    const handleKeyPress = (e) => {
-        if (e.key === "Enter") {
-          handleSubmit();
-        }
-    };
+  const handleSubmit = (content) => (event) => {
+    event.preventDefault(); // onSubmit 이벤트는 브라우저를 새로고치기 때문에 막아주기
 
-    useEffect(() => {
-        ref.current.focus();
-      }, []);
+    // 만약 input 창이 빈채로 submit을 하려고 할 땐 return시키기
+    if (!content) {
+      return alert("todo를 입력해주세요!");
+    }
+    // 로그인 기능 구현 후 데이터 수정하기
+    axios.post('http://localhost:8080/todo', {
+      email: `${user.email}`,
+      content: content,
+      doneFlag: 0,
+    })
+      .then(() => {
+        setContent(''); // submit을 한 후에는 input 창을 비우기
+        getTodoData();
+      });
+  };;
 
-    return(
-        <Container>
-            <form onSubmit={handleSubmit}>
-                <TextInput
-                    type="text"
-                    name="text"
-                    ref={ref}
-                    placeholder="할 일을 입력하세요"
-                    value={content}
-                    onChange={handleChange}
-                    autoFocus
-                />
-                <AddButton type="submit" onClick={handleSubmit(content)} onKeyPress={handleKeyPress}>
-                    ADD
-                </AddButton>
-            </form>
-        </Container>
-    )
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSubmit();
+    }
+  };
+
+  useEffect(() => {
+    ref.current.focus();
+  }, []);
+
+  return (
+    <Container>
+      <form onSubmit={handleSubmit}>
+        <TextInput
+          type="text"
+          name="text"
+          ref={ref}
+          placeholder="할 일을 입력하세요"
+          value={content}
+          onChange={handleChange}
+          autoFocus
+        />
+        <AddButton type="submit" onClick={handleSubmit(content)} onKeyPress={handleKeyPress}>
+          ADD
+        </AddButton>
+      </form>
+    </Container>
+  )
 }
 
 // CSS

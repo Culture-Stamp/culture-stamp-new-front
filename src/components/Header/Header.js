@@ -22,7 +22,12 @@ const Header = () => {
             "Authorization": `Bearer ${response.access_token}`
           }
         })
-        console.log('res : ', res.data);
+
+        // test(res.data);
+        console.log('response : ', response);
+
+
+        //구분
         dispatch(setEmail(res.data.email));
         dispatch(setName(res.data.name));
       } catch (error) {
@@ -31,6 +36,28 @@ const Header = () => {
     },
   });
 
+
+  // const test = async (data) => {
+  //   const user = {
+  //     'email': data.email,
+  //     'email_verified': data.email_verified,
+  //     'given_name': data.given_name,
+  //     'locale': data.locale,
+  //     'name': data.name,
+  //     'picture': data.picture,
+  //     'sub': data.sub,
+  //   };
+
+  //   console.log('user : ', user);
+  //   try {
+  //     const res = await axios.get(`http://localhost:8080/oauth/test`, { user });
+  //     console.log('res : ', res);
+
+  //   } catch (error) {
+  //     console.log('err : ', error);
+  //     throw error.response.data;
+  //   }
+  // }
 
   const [scrollY, setScrollY] = useState(0);
   const [scrollActive, setScrollActive] = useState(false);
@@ -75,7 +102,8 @@ const Header = () => {
 
   // 카테고리 데이터 가져오기
   useEffect(() => {
-    axios.get("http://localhost:8080/category").then((res) => {
+    console.log(`${user.email}`)
+    axios.get(`http://localhost:8080/category?email=${user.email}`).then((res) => {
       console.log("category", res.data);
       setCategory(res.data);
     })

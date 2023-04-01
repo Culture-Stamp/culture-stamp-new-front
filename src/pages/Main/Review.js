@@ -8,6 +8,10 @@ const Review = () => {
 
 	useEffect(() => {
 	}, []);
+
+	const formSubmit = () => {
+		console.log('sdfsdf');
+	}
 	return (
 		<div className='text-center' style={{ maxWidth: '640px', margin: '0px auto' }}>
 			<h1>Review</h1>
@@ -18,7 +22,39 @@ const Review = () => {
 							<h3>Title</h3>
 						</Form.Label>
 						<Col lg="10">
-							<Form.Control size="lg" type="text" placeholder="제목을 입력하세요" />
+							<Form.Control size="lg" type="text" placeholder="제목을 입력하세요" required />
+						</Col>
+					</Form.Group>
+					<Form.Group as={Row} className="mb-3" controlId="location">
+						<Form.Label column lg="2">
+							<h3>Location</h3>
+						</Form.Label>
+						<Col lg="10">
+							<Form.Control size="lg" type="text" placeholder="장소를 입력하세요" />
+						</Col>
+					</Form.Group>
+					<Form.Group as={Row} className="mb-3" controlId="companion">
+						<Form.Label column lg="2">
+							<h3>Companion</h3>
+						</Form.Label>
+						<Col lg="10">
+							<Form.Control size="lg" type="text" placeholder="함께한 사람을 입력하세요" />
+						</Col>
+					</Form.Group>
+					<Form.Group as={Row} className="mb-3" controlId="rating">
+						<Form.Label column lg="2">
+							<h3>Rating</h3>
+						</Form.Label>
+						<Col lg="10">
+							<Form.Control size="lg" type="number" min={0} max={5} placeholder="평가를 입력하세요" />
+						</Col>
+					</Form.Group>
+					<Form.Group as={Row} className="mb-3" controlId="price">
+						<Form.Label column lg="2">
+							<h3>Price</h3>
+						</Form.Label>
+						<Col lg="10">
+							<Form.Control size="lg" type="number" placeholder="가격을 입력하세요" />
 						</Col>
 					</Form.Group>
 					<Form.Group as={Row} className="mb-3" controlId="date">
@@ -58,7 +94,7 @@ const Review = () => {
 							<Form.Control as="textarea" rows={3} placeholder="내용을 입력하세요" />
 						</Col>
 					</Form.Group>
-					<Button variant="primary"><h3>Stamp!</h3></Button>{' '}
+					<Button variant="primary" type='submit' onClick={formSubmit}><h3>Stamp!</h3></Button>{' '}
 				</Form>
 			</div>
 		</div>

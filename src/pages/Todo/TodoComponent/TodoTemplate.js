@@ -6,13 +6,15 @@ import TodoInsert from './TodoInsert';
 import TodoItemList from './TodoItemList';
 import update from 'immutability-helper'
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 function TodoTemplate() {
   const [todos, setTodos] = useState([]);
+  const user = useSelector((state) => { return state.user });
 
   // todo 데이터 가져오기 api 
   const getTodoData = () => {
-    axios.get("http://localhost:8080/todo").then((res)=>{
+    axios.get(`http://localhost:8080/todo?email=${user.email}`).then((res) => {
       console.log("res", res.data);
       setTodos(res.data);
     })
@@ -20,7 +22,7 @@ function TodoTemplate() {
 
   //Todo 데이터 삭제하기 api
   const removeTodoData = (id) => {
-    axios.delete(`http://localhost:8080/todo/${id}`).then(()=>{
+    axios.delete(`http://localhost:8080/todo/${id}`).then(() => {
       console.log("Success Remove!");
       getTodoData();
     })
@@ -49,15 +51,15 @@ function TodoTemplate() {
     );
   }, []);
 
-  useEffect(()=>{
+  useEffect(() => {
     getTodoData();
-  },[])
+  }, [])
 
   return (
     <div>
-      <TodoInsert getTodoData={getTodoData}/>
+      <TodoInsert getTodoData={getTodoData} />
       <DndProvider backend={HTML5Backend}>
-        <TodoItemList todos={todos} onRemove={onRemove} onToggle={onToggle} moveCard={moveCard}/>
+        <TodoItemList todos={todos} onRemove={onRemove} onToggle={onToggle} moveCard={moveCard} />
       </DndProvider>
     </div>
   );

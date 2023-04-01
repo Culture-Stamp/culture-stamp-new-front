@@ -48,7 +48,7 @@ const Header = () => {
 
     console.log('user : ', user);
     try {
-      const res = await axios.get(`http://localhost:8080/oauth/test`, { user });
+      const res = await axios.get(`http://localhost:8080/oauth/test?email=${data.email}&name=${data.name}&email_verified=${data.email_verified}`);
       console.log('23412343 : ', res);
 
     } catch (error) {
